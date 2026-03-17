@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,19 +25,22 @@ body {
   100%{background-position:0%}
 }
 
+/* chữ trên */
 .text {
   position:absolute;
   top:50px;
   color:#fff;
-  font-size:55px;
+  font-size:60px;
   font-weight:bold;
 }
 
+/* chữ dưới */
 .bottom {
   position:absolute;
   bottom:30px;
   color:#fff;
-  font-size:24px;
+  font-size:26px;
+  font-weight:600;
   animation:blink 1.2s infinite;
 }
 
@@ -48,8 +51,8 @@ body {
 /* TIM */
 .heart {
   position:relative;
-  width:300px;
-  height:300px;
+  width:340px;
+  height:340px;
   background:red;
   transform:rotate(-45deg);
   animation:beat 1.2s infinite;
@@ -64,20 +67,20 @@ body {
 .heart:after {
   content:"";
   position:absolute;
-  width:300px;
-  height:300px;
+  width:340px;
+  height:340px;
   background:red;
   border-radius:50%;
 }
 
-.heart:before { top:-150px; }
-.heart:after { left:150px; }
+.heart:before { top:-170px; }
+.heart:after { left:170px; }
 
-/* ẢNH TO HƠN */
+/* ẢNH TO HƠN NỮA */
 .img-box {
   position:absolute;
-  width:220px;
-  height:220px;
+  width:260px;
+  height:260px;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) rotate(45deg);
@@ -92,7 +95,7 @@ body {
   object-fit:cover;
 }
 
-/* TIM BAY */
+/* tim bay nền */
 .floating {
   position:absolute;
   color:rgba(255,255,255,.3);
@@ -121,7 +124,7 @@ body {
   </div>
 </div>
 
-<div class="bottom">点击屏幕 ❤️</div>
+<div class="bottom">Nhấn vào màn hình để tim bắn tùm lum ❤️</div>
 
 <audio id="music" loop>
   <source src="bts.mp3">
@@ -130,43 +133,43 @@ body {
 <script>
 const music = document.getElementById("music");
 
-/* AUTO TRY PLAY */
+/* thử auto */
 window.onload = () => {
   music.play().catch(()=>{});
 };
 
-/* CLICK → CHẮC CHẮN CHẠY */
+/* click */
 document.addEventListener("click", e => {
   music.play();
   burst(e.clientX,e.clientY);
 });
 
-/* TIM BAY NỀN */
+/* tim bay nền */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="floating";
   h.innerHTML="❤";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=20+Math.random()*20+"px";
+  h.style.fontSize=20+Math.random()*25+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
 },300);
 
-/* TIM NỔ */
+/* tim nổ */
 function burst(x,y){
   const colors=["red","pink","yellow","blue","purple","orange"];
-  for(let i=0;i<25;i++){
+  for(let i=0;i<30;i++){
     let h=document.createElement("div");
     h.className="burst";
     h.innerHTML="❤";
 
     let angle=Math.random()*Math.PI*2;
-    let dist=100+Math.random()*120;
+    let dist=120+Math.random()*150;
 
     h.style.left=x+"px";
     h.style.top=y+"px";
     h.style.color=colors[Math.floor(Math.random()*colors.length)];
-    h.style.fontSize=15+Math.random()*20+"px";
+    h.style.fontSize=18+Math.random()*25+"px";
 
     document.body.appendChild(h);
 
@@ -175,7 +178,7 @@ function burst(x,y){
     let start=performance.now();
 
     function anim(t){
-      let p=(t-start)/800;
+      let p=(t-start)/900;
       if(p>1){h.remove();return;}
       h.style.transform=`translate(${dx*p}px,${dy*p}px)`;
       h.style.opacity=1-p;
